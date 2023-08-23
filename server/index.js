@@ -26,6 +26,9 @@ app.use(function (req, res, next) {
 mongoose.set('strictQuery', false)
 mongoose.connect(process.env.MONGO_DB);
 
+//alla nya apiers endpoints måste definieras här.
+//#region ###QUIZ###
+
 app.get("/GetQuizById/:id", GetQuizById);
 
 app.get("/GetAllQuizes", GetAllQuizes);
@@ -34,37 +37,7 @@ app.post("/SaveQuiz", SaveQuiz);
 
 app.get("/DeleteQuiz/:id", DeleteQuiz);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//#endregion
 
 app.listen(process.env.PORT, () => {
     console.log('App listening on port: ' + process.env.PORT);
