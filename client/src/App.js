@@ -1,11 +1,13 @@
-import React from 'react'
+import React from "react";
+import Navbar from "./components/Navbar";
 
-function App() {
+function App({ children }) {
   return (
     <div>
-      
+      <Navbar />
+      {children}
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
