@@ -38,9 +38,24 @@ export const SaveQuiz = async (req, res) => {
   } catch (err) {
     console.log(err);
     //res.status(500).send({ err: "internal server error" });
+    //possible to add if statement if dev show this above otherwhise display the internal error as below
     res.status(500).send({ err: err });
   }
 };
+
+export const InsertManyQuizes = async (req, res) => {
+  try {
+    let quizArray = req.body;
+    const resp = await QuizModel.insertMany(quizArray);
+    res.send(resp);
+  } catch (err) {
+    console.log(err);
+    //res.status(500).send({ err: "internal server error" });
+    res.status(500).send({ err: err });
+  }
+};
+
+
 
 //#endregion
 
@@ -57,5 +72,6 @@ export const DeleteQuiz = async (req, res) => {
     //res.status(500).send({ err: err });
   }
 };
+
 
 //#endregion
