@@ -6,6 +6,7 @@ import {
   DeleteQuiz,
   GetAllQuizes,
   GetQuizById,
+  GetQuizesByDifficulty,
   InsertManyQuizes,
   SaveQuiz,
 } from "./quiz/quizDataservice.js";
@@ -40,6 +41,8 @@ mongoose.connect(process.env.MONGO_DB);
 app.get("/GetQuizById/:id", GetQuizById);
 
 app.get("/GetAllQuizes", GetAllQuizes);
+
+app.get("/GetQuizesByDifficulty/:difficulty", GetQuizesByDifficulty);
 
 app.post("/SaveQuiz", SaveQuiz);
 

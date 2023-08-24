@@ -12,7 +12,7 @@ const quiz = new mongoose.Schema({
   difficulty: {
     type: Number,
     min: 1,
-    max: 10,
+    max: 3,
     required: true,
   },
   category: {

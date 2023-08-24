@@ -26,6 +26,18 @@ export const GetAllQuizes = async (req, res) => {
   }
 };
 
+export const GetQuizesByDifficulty = async (req, res) => {
+  try {
+    let difficulty = req.params.difficulty;
+    let resp = await QuizModel.find({ difficulty: difficulty });
+    res.send(resp);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({ err: "internal server error" });
+    //res.status(500).send({ err: err });
+  }
+};
+
 //#endregion
 
 //#region ###POST###
@@ -55,8 +67,6 @@ export const InsertManyQuizes = async (req, res) => {
   }
 };
 
-
-
 //#endregion
 
 //#region ###DELETE###
@@ -72,6 +82,5 @@ export const DeleteQuiz = async (req, res) => {
     //res.status(500).send({ err: err });
   }
 };
-
 
 //#endregion
