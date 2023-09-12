@@ -1,29 +1,26 @@
 import React, { useEffect, useState } from "react";
-import { useQuiz } from "../hooks/useQuiz";
+import "./Quiz.css"; // Import the CSS file
+
+// ... Rest of your component code
 
 //Hook test, fetch and display quizes on frontpage
 
-export default function Quiz({quiz,difficulty,setQuiz}) {
-
- 
-
+export default function Quiz({ quiz, difficulty, setQuiz }) {
   const inputColor = (obj) => {
-
-    if(quiz.userSubmitted) {
-
+    if (quiz.userSubmitted) {
       return obj.isAnswerCorrect ? "green" : "red";
-    }
-    else {
+    } else {
       return;
     }
-  }
+  };
 
   const checkAnswers = () => {
     let nbrCorrectAnswers = 0;
     let submittedQuiz = [...quiz.questions].map((question) => {
       let answer = document.getElementById(`answer_${question._id}`).value;
       question.userResponse = answer;
-      question.isAnswerCorrect = question.userResponse?.toLowerCase() === question.answer.toLowerCase() ;
+      question.isAnswerCorrect =
+        question.userResponse?.toLowerCase() === question.answer.toLowerCase();
       if (question.isAnswerCorrect) {
         nbrCorrectAnswers++;
       }
@@ -37,32 +34,41 @@ export default function Quiz({quiz,difficulty,setQuiz}) {
   };
 
   return (
-    <div>
+    <div className="quiz-container">
       <h1>{"Current difficulty is: " + difficulty}</h1>
 
-
       <div>
-        <ul>
+        <ul className="quiz-question-list">
           {quiz?.questions?.map((obj) => {
             return (
-              <li>
+              <li key={obj._id} className="quiz-question-item">
                 <span>{obj.question}</span>
-                <input style={{backgroundColor:inputColor(obj)}} name={`answer_${obj._id}`} id={`answer_${obj._id}`} type="text" />
+                <input
+                  className={`quiz-answer-input ${
+                    quiz.userSubmitted
+                      ? obj.isAnswerCorrect
+                        ? "quiz-correct-answer"
+                        : "quiz-incorrect-answers"
+                      : ""
+                  }`}
+                  name={`answer_${obj._id}`}
+                  id={`answer_${obj._id}`}
+                  type="text"
+                />
               </li>
             );
           })}
-          <li>
-            {" "}
-            <button style={{ margin: 10 }} onClick={() => checkAnswers()}>
-              Submit answer
-            </button>
-          </li>
         </ul>
-        {quiz.userSubmitted && (
-          <span>
-            Correct answers: {quiz.nbrCorrectAnswers}/{quiz.questions.length}
-          </span>
-        )}
+        <div className="center">
+          <button className="quiz-submit-button" onClick={() => checkAnswers()}>
+            Submit answer
+          </button>
+          {quiz.userSubmitted && (
+            <span className="quiz-correct-answers">
+              Correct answers: {quiz.nbrCorrectAnswers}/{quiz.questions.length}
+            </span>
+          )}
+        </div>
       </div>
     </div>
   );

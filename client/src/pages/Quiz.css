@@ -1,0 +1,87 @@
+/* Quiz.css */
+
+/* Style the container div */
+/* Quiz.css */
+
+.quiz-container {
+  margin: 20px auto; /* Center horizontally, top margin added for spacing */
+  width: 500px; /* Set max width */
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff; /* White background */
+}
+
+/* Style the question list */
+.quiz-question-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+/* Style each question item */
+.quiz-question-item {
+  margin-bottom: 10px;
+}
+
+/* Style the answer input */
+.quiz-answer-input {
+  display: flex;
+  width: 100%;
+  padding: 10px; /* Increased padding for touch devices */
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  box-sizing: border-box;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+/* Style the submit button */
+.quiz-submit-button {
+  margin: 20px auto; /* Increased margin for better spacing */
+  padding: 10px 20px;
+  background-color: #ff5722; /* Red theme */
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.quiz-submit-button:hover {
+  background-color: #e64a19; /* Darker red on hover */
+}
+
+/* Style the correct answers message */
+.quiz-correct-answers {
+  display: block;
+  text-align: center;
+  font-weight: bold;
+  color: green;
+}
+
+.quiz-correct-answer {
+  display: block;
+  font-weight: bold;
+  color: green;
+}
+
+/* Style the incorrect answers message */
+.quiz-incorrect-answers {
+  font-weight: bold;
+  color: red;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .quiz-container {
+    margin: 10px;
+    padding: 10px;
+  }
+
+  .quiz-submit-button {
+    margin: 10px 0;
+  }
+}

@@ -10,7 +10,7 @@
 .main-nav-link:link,
 .main-nav-link:visited {
   text-decoration: none;
-  color: rgb(201, 46, 46);
+  color: red;
   font-weight: 500;
   transition: all 0.3s;
 }
