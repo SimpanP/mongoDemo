@@ -14,7 +14,7 @@ export default function Quiz({ quiz, difficulty, setQuiz }) {
     }
   };
 
-  const checkAnswers = () => {
+  const checkAnswers = (name) => {
     let nbrCorrectAnswers = 0;
     let submittedQuiz = [...quiz.questions].map((question) => {
       let answer = document.getElementById(`answer_${question._id}`).value;
@@ -26,6 +26,14 @@ export default function Quiz({ quiz, difficulty, setQuiz }) {
       }
       return question;
     });
+
+    let storage = sessionStorage.getItem(name);
+    if(storage) {
+      //abort or add "1" to name string,
+    }
+
+    sessionStorage.setItem(name, `${name}: ${nbrCorrectAnswers}/10`);
+
     setQuiz({
       userSubmitted: true,
       nbrCorrectAnswers: nbrCorrectAnswers,
@@ -44,13 +52,12 @@ export default function Quiz({ quiz, difficulty, setQuiz }) {
               <li key={obj._id} className="quiz-question-item">
                 <span>{obj.question}</span>
                 <input
-                  className={`quiz-answer-input ${
-                    quiz.userSubmitted
-                      ? obj.isAnswerCorrect
-                        ? "quiz-correct-answer"
-                        : "quiz-incorrect-answers"
-                      : ""
-                  }`}
+                  className={`quiz-answer-input ${quiz.userSubmitted
+                    ? obj.isAnswerCorrect
+                      ? "quiz-correct-answer"
+                      : "quiz-incorrect-answers"
+                    : ""
+                    }`}
                   name={`answer_${obj._id}`}
                   id={`answer_${obj._id}`}
                   type="text"
@@ -60,7 +67,19 @@ export default function Quiz({ quiz, difficulty, setQuiz }) {
           })}
         </ul>
         <div className="center">
-          <button className="quiz-submit-button" onClick={() => checkAnswers()}>
+          <button className="quiz-submit-button" onClick={() => {
+            
+            //REMOVE
+            //get a name string, this is auto generated but should be sent from input field.
+            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            let name = "";
+            for(let i = 0; i < 10; i++) {
+              name += characters.charAt(Math.floor(Math.random() * characters.length))
+            }
+            //REMOVE ^
+
+            checkAnswers(name);
+          }}>
             Submit answer
           </button>
           {quiz.userSubmitted && (
