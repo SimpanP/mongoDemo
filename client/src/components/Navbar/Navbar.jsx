@@ -11,12 +11,7 @@ function Navbar() {
         <ul className="main-nav-list">
           <li>
             <Link className="main-nav-link" to="/">
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link className="main-nav-link" to="/quiz">
-              Quiz
+              New Quiz
             </Link>
           </li>
           <li>

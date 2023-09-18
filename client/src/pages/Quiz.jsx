@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Quiz.css"; // Import the CSS file
 
-// ... Rest of your component code
-
 //Hook test, fetch and display quizes on frontpage
 
 export default function Quiz({ quiz, difficulty, setQuiz }) {
@@ -13,6 +11,7 @@ export default function Quiz({ quiz, difficulty, setQuiz }) {
       return;
     }
   };
+  const [userName, setUserName] = useState("");
 
   const checkAnswers = (name) => {
     let nbrCorrectAnswers = 0;
@@ -68,7 +67,6 @@ export default function Quiz({ quiz, difficulty, setQuiz }) {
         </ul>
         <div className="center">
           <button className="quiz-submit-button" onClick={() => {
-            
             //REMOVE
             //get a name string, this is auto generated but should be sent from input field.
             const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -82,11 +80,21 @@ export default function Quiz({ quiz, difficulty, setQuiz }) {
           }}>
             Submit answer
           </button>
+          <div>
+            <p>Enter your username:</p>
+          <input
+            type="text"
+            placeholder="Enter your name"
+            onChange={(e) => setUserName(e.target.value)}
+            />
+          </div>
+          <div>
           {quiz.userSubmitted && (
             <span className="quiz-correct-answers">
-              Correct answers: {quiz.nbrCorrectAnswers}/{quiz.questions.length}
+              Correct answers: {userName || "Anonymous"} - {quiz.nbrCorrectAnswers}/{quiz.questions.length}
             </span>
           )}
+          </div>
         </div>
       </div>
     </div>
