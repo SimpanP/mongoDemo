@@ -12,6 +12,21 @@
   background-color: #fff; /* White background */
 }
 
+.quiz-center {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.quiz-center input {
+  width: 200px;
+  margin: 0 auto;
+}
+
+.quiz-center p {
+  text-align: center;
+}
+
 /* Style the question list */
 .quiz-question-list {
   list-style-type: none;

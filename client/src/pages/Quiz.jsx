@@ -12,6 +12,7 @@ export default function Quiz({ quiz, difficulty, setQuiz }) {
     }
   };
   const [userName, setUserName] = useState("");
+  const [start, setStart] = useState(false);
 
   const checkAnswers = (name) => {
     let nbrCorrectAnswers = 0;
@@ -27,7 +28,7 @@ export default function Quiz({ quiz, difficulty, setQuiz }) {
     });
 
     let storage = sessionStorage.getItem(name);
-    if(storage) {
+    if (storage) {
       //abort or add "1" to name string,
     }
 
@@ -42,61 +43,85 @@ export default function Quiz({ quiz, difficulty, setQuiz }) {
 
   return (
     <div className="quiz-container">
-      <h1>{"Current difficulty is: " + difficulty}</h1>
-
-      <div>
-        <ul className="quiz-question-list">
-          {quiz?.questions?.map((obj) => {
-            return (
-              <li key={obj._id} className="quiz-question-item">
-                <span>{obj.question}</span>
-                <input
-                  className={`quiz-answer-input ${quiz.userSubmitted
-                    ? obj.isAnswerCorrect
-                      ? "quiz-correct-answer"
-                      : "quiz-incorrect-answers"
-                    : ""
-                    }`}
-                  name={`answer_${obj._id}`}
-                  id={`answer_${obj._id}`}
-                  type="text"
-                />
-              </li>
-            );
-          })}
-        </ul>
-        <div className="center">
-          <button className="quiz-submit-button" onClick={() => {
-            //REMOVE
-            //get a name string, this is auto generated but should be sent from input field.
-            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-            let name = "";
-            for(let i = 0; i < 10; i++) {
-              name += characters.charAt(Math.floor(Math.random() * characters.length))
-            }
-            //REMOVE ^
-
-            checkAnswers(name);
-          }}>
-            Submit answer
-          </button>
-          <div>
+      {!start && (
+        <div>
+          <div className="quiz-center">
             <p>Enter your username:</p>
-          <input
-            type="text"
-            placeholder="Enter your name"
-            onChange={(e) => setUserName(e.target.value)}
+            <input
+              type="text"
+              placeholder="Enter your name"
+              onChange={(e) => setUserName(e.target.value)}
             />
-          </div>
-          <div>
-          {quiz.userSubmitted && (
-            <span className="quiz-correct-answers">
-              Correct answers: {userName || "Anonymous"} - {quiz.nbrCorrectAnswers}/{quiz.questions.length}
-            </span>
-          )}
+            <button
+              className="quiz-submit-button"
+              onClick={() => {
+                setStart(true);
+              }}
+            >
+              Start
+            </button>
           </div>
         </div>
-      </div>
+      )}
+      {start && (
+        <div>
+          <h1>{"Current difficulty is: " + difficulty}</h1>
+
+          <div>
+            <ul className="quiz-question-list">
+              {quiz?.questions?.map((obj) => {
+                return (
+                  <li key={obj._id} className="quiz-question-item">
+                    <span>{obj.question}</span>
+                    <input
+                      className={`quiz-answer-input ${
+                        quiz.userSubmitted
+                          ? obj.isAnswerCorrect
+                            ? "quiz-correct-answer"
+                            : "quiz-incorrect-answers"
+                          : ""
+                      }`}
+                      name={`answer_${obj._id}`}
+                      id={`answer_${obj._id}`}
+                      type="text"
+                    />
+                  </li>
+                );
+              })}
+            </ul>
+            <div className="center">
+              <button
+                className="quiz-submit-button"
+                onClick={() => {
+                  //REMOVE
+                  //get a name string, this is auto generated but should be sent from input field.
+                  const characters =
+                    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+                  let name = "";
+                  for (let i = 0; i < 10; i++) {
+                    name += characters.charAt(
+                      Math.floor(Math.random() * characters.length)
+                    );
+                  }
+                  //REMOVE ^
+
+                  checkAnswers(name);
+                }}
+              >
+                Submit answer
+              </button>
+              <div>
+                {quiz.userSubmitted && (
+                  <span className="quiz-correct-answers">
+                    Correct answers: {userName || "Anonymous"} -{" "}
+                    {quiz.nbrCorrectAnswers}/{quiz.questions.length}
+                  </span>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
