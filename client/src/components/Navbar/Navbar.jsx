@@ -14,11 +14,6 @@ function Navbar() {
               New Quiz
             </Link>
           </li>
-          <li>
-            <Link className="main-nav-link" to="/report">
-              Report
-            </Link>
-          </li>
         </ul>
       </nav>
     </header>
